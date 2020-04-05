@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+  app:
+    container_name: playground_app
+    image: playground/app:1.0
+    build:
+      context: ./app
+      dockerfile: ./dockerfile     
+    working_dir: /usr/src/app
+    restart: always
+    stdin_open: true
+    env_file:
+      - ./.env   
+    ports:
+      - ${PORT_APP_HOST}:${PORT_APP_CONTAINER}
+    volumes: 
+      - ./app:/usr/src/app
+    command: "yarn start"
